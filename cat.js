@@ -2,7 +2,9 @@
 
 const fs = require('fs');
 
-module.exports = function (fileName) {
+module.exports = catFunc;
+
+function catFunc(fileName) {
   fs.readFile(fileName, 'utf8', (err, files) => {
     if (err) {
       throw err;
@@ -12,4 +14,4 @@ module.exports = function (fileName) {
 
     process.stdout.write('\nprompt > ');
   });
-};
+}

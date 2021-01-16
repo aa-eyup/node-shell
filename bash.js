@@ -1,7 +1,10 @@
 // registered a "listener" so node won't kill process automatically -> kill w cmd+c
 
-const pwdLogic = require('./pwd');
-const fsLogic = require('./fs');
+// how come pwd and fd do not need to be assigned to variable
+// => think as if require('./pwd') is replaced by the whole process.stdin.on expression
+require('./pwd');
+require('./fs');
+
 const cat = require('./cat');
 const curl = require('./curl');
 
