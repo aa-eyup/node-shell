@@ -1,4 +1,6 @@
 module.exports = process.stdin.on('data', (data) => {
+  // process.stdout.write(data.toString()); // => pwd
+
   const cmd = data.toString().trim(); // data = user's input
 
   // process.stdout.write('You typed: ' + cmd);

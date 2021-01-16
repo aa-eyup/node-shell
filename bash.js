@@ -1,3 +1,5 @@
+// registered a "listener" so node won't kill process automatically -> kill w cmd+c
+
 const pwdLogic = require('./pwd');
 const fsLogic = require('./fs');
 const cat = require('./cat');
@@ -16,15 +18,24 @@ process.stdin.on('data', (data) => {
     cat(fileName);
   }
 
-  if (cmd === 'curl') {
-    const siteName = data.toString().split(' ')[1].trim();
-    curl(siteName);
-  }
+  // curl logic places below into separate stdin
+  // if (cmd === 'curl') {
+  //   const siteName = data.toString().split(' ')[1].trim();
+  //   curl(siteName);
+  // }
 });
 
-//cat thefilename
+process.stdin.on('data', (data) => {
+  // curl https://google.com => second element (idx = 1) will be the url
+  const cmd = data.toString().split(' ');
 
-// registered a "listener" so node won't kill process automatically -> kill w cmd+c
+  if (cmd[0] === 'curl') {
+    const siteName = cmd[1].trim();
+    curl(siteName);
+    // runtime (?) does not comeback back to this EC
+    // placed new line prompt within curl.js
+  }
+});
 
 /*
 process.env
